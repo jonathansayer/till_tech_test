@@ -11,17 +11,10 @@
   </head>
 
   <body ng-controller = "cafeTillController as searchCtrl">
+    <button class="btn" ng-click="searchCtrl.doSearch()">Search</button>
     <ul class="list-group">
-      <li ng-repeat="item in searchCtrl.searchResult.items">
-        Name:{{item.shopName}} </br>
-        Address:{{item.address}} </br>
-        Phone:{{item.phone}} </br>
-        {{item.prices}}
-        <ul class="price-list">
-          <li ng-repeat="item in searchCtrl.searchResult.items.prices[0]">
-            {{items}}
-          </li>
-        </ul>
+      <li ng-repeat="(key,price) in searchCtrl.searchResult.items">
+        {{key}} is priced at {{price|currency : "&pound;"}}
       </li>
     </ul>
 
