@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang = "en" ng-app = "cafeTill">
+  <head>
+    <title> Cafe Till </title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cafeTillController.js"></script>
+  </head>
+
+  <body ng-controller = "cafeTillController as searchCtrl">
+    <ul class="list-group">
+      <li ng-repeat="item in searchCtrl.searchResult.items">
+        Name:{{item.shopName}} </br>
+        Address:{{item.address}} </br>
+        Phone:{{item.phone}} </br>
+        {{item.prices}}
+        <ul class="price-list">
+          <li ng-repeat="item in searchCtrl.searchResult.items.prices[0]">
+            {{items}}
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+  </body>
