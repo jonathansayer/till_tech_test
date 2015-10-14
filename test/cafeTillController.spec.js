@@ -8,8 +8,7 @@ describe('cafeTillController', function() {
    }));
 
   it('initilises with an empty search term', function(){
-    expect(ctrl.searchResult).toBeUndefined();
-    expect(ctrl.searchTerm).toBeUndefined();
+    expect(ctrl.menu).toBeDefined();
   });
 
   var items =
@@ -33,13 +32,20 @@ describe('cafeTillController', function() {
 
 
   it('displays all data',function() {
-    ctrl.doSearch();
-    expect(ctrl.searchResult.items).toEqual(items);
+    expect(ctrl.menu.items).toEqual(items);
   });
 
   it('displays the items that can be ordered', function(){
-    ctrl.doSearch();
-    expect(ctrl.searchResult.items).toEqual(items)
+    expect(ctrl.menu.items).toEqual(items)
+  })
+
+  it('should intialise with an total of 0', function() {
+    expect(ctrl.total).toEqual(0)
+  })
+
+  it('should be able to increase the total by the price of an item', function() {
+    ctrl.increaseTotal(2.20)
+    expect(ctrl.total).toEqual(2.20)
   })
 
 })

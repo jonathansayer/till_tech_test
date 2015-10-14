@@ -1,8 +1,9 @@
 cafeTill.controller('cafeTillController',[function(){
 
   var self = this;
+  self.total = 0;
 
-  self.searchResult = {
+  self.menu = {
   "items": {
           "Cafe Latte": 4.75,
           "Flat White": 4.75,
@@ -22,5 +23,9 @@ cafeTill.controller('cafeTillController',[function(){
         }
 
       };
+
+  self.increaseTotal = function(price){
+    self.total += price;
+  }
 
   }]);

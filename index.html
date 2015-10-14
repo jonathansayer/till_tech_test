@@ -11,10 +11,13 @@
   </head>
 
   <body ng-controller = "cafeTillController as searchCtrl">
-      <button ng-repeat="(key,price) in searchCtrl.searchResult.items" >
+      <button ng-repeat="(key,price) in searchCtrl.menu.items" ng-click ="searchCtrl.increaseTotal(price)" >
         {{key}}
       </button>
 
+      <div class="total">
+        {{searchCtrl.total |currency : "&pound;"}}
+      </div>
   </body>
 
   <!-- {{price|currency : "&pound;"}} -->
