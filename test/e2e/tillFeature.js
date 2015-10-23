@@ -1,12 +1,14 @@
 describe('Cafe Till', function() {
-  
-  it('has a title', function() {
+
+  beforeEach(function() {
     browser.get('http://localhost:8080');
+  })
+
+  it('has a title', function() {
     expect(browser.getTitle()).toEqual('Cafe Till');
   });
 
   it('the total is displayed at the start', function() {
-    browser.get('http://localhost:8080');
     expect(element(by.binding('searchCtrl.total')).getText()).toEqual('£0.00')
   })
 
