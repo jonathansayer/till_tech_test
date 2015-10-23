@@ -2,6 +2,7 @@ describe('Cafe Till', function() {
 
   beforeEach(function() {
     browser.get('http://localhost:8080');
+    total = element(by.binding('searchCtrl.total'))
   })
 
   it('has a title', function() {
@@ -9,12 +10,12 @@ describe('Cafe Till', function() {
   });
 
   it('the total is displayed at the start', function() {
-    expect(element(by.binding('searchCtrl.total')).getText()).toEqual('£0.00')
+    expect(total.getText()).toEqual('£0.00')
   })
 
   it('changes the total when an item is selected', function() {
     item_button = element(by.buttonText('Tea'));
     item_button.click();
-    expect(element(by.binding('searchCtrl.total')).getText()).toEqual('£3.65')
+    expect(total.getText()).toEqual('£3.65')
   })
 });
