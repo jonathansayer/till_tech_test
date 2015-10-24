@@ -20,11 +20,11 @@ cafeTill.controller('cafeTillController',[function(){
 
 
   self.alreadyOrdered = function(item) {
-    for(i = 0; i <= self.orderedItems.length; i ++){
-      if(self.orderedItems.length == 0){
-        return false
-      }
-      else if(self.orderedItems[i].item == item){
+    if(self.orderedItems.length == 0){
+      return false
+    }
+    for(i = 0; i < self.orderedItems.length; i ++){
+      if(self.orderedItems[i].item == item){
         return true;
       }
     }
