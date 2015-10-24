@@ -41,5 +41,11 @@ describe('Cafe Till', function() {
       cappucino.click();
       expect(receipt.getText()).toContain('2X Cappucino');
     });
+
+    it('must show the shop information on the reciept', function() {
+      expect(receipt.getText()).toContain("The Coffee Connection");
+      expect(receipt.getText()).toContain("123 Lakeside Way");
+      expect(receipt.getText()).toContain("phone: 16503600708");
+    })
   });
 });

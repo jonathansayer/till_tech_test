@@ -2,6 +2,7 @@ cafeTill.controller('cafeTillController',[function(){
 
   var self = this;
   self.total = 0;
+  self.shopInfo = info[0]
   self.menu = info[0].prices[0]
   self.orderedItems = [];
 
