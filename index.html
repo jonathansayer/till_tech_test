@@ -12,7 +12,8 @@
   </head>
 
   <body ng-controller = "cafeTillController as searchCtrl">
-      <button ng-repeat="(key,price) in searchCtrl.menu.items" ng-click ="searchCtrl.increaseTotal(price)" >
+
+      <button ng-repeat="(key,price) in searchCtrl.menu" ng-click="searchCtrl.increaseTotal(price)" >
         {{key}}
       </button>
 
