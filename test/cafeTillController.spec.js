@@ -54,10 +54,8 @@ describe('cafeTillController', function() {
    }));
 
   it('initilises with an menu buttons', function(){
-    console.log(ctrl.total)
     expect(ctrl.menu).toBeDefined();
   });
-
 
   it('displays all data',function() {
     expect(ctrl.menu).toEqual(prices);
@@ -70,6 +68,17 @@ describe('cafeTillController', function() {
   it('should be able to increase the total by the price of an item', function() {
     ctrl.increaseTotal(2.20)
     expect(ctrl.total).toEqual(2.20)
+  })
+
+  it('should add ordered items to the ordered array', function() {
+    ctrl.addToOrderedItems('Tea');
+    expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:1}]);
+  })
+
+  it('should inrease the quantity of items have already been ordered', function() {
+    ctrl.addToOrderedItems('Tea');
+    ctrl.addToOrderedItems('Tea');
+    expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:2}]);
   })
 
 })

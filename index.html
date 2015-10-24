@@ -13,7 +13,7 @@
 
   <body ng-controller = "cafeTillController as searchCtrl">
 
-    <button ng-repeat="(key,price) in searchCtrl.menu" ng-click="searchCtrl.increaseTotal(price)" >
+    <button ng-repeat="(key,price) in searchCtrl.menu" ng-click="searchCtrl.increaseTotal(price); searchCtrl.addToOrderedItems(key)" >
       {{key}}
     </button>
 
@@ -21,7 +21,12 @@
       {{searchCtrl.total |currency : "&pound;"}}
     </div>
 
-    <div class="receipt">Receipt</div>
+    <div class="receipt">
+      Receipt
+      <div class="order" ng-repeat="item in searchCtrl.orderedItems">
+        {{item}}
+      </div>
+    </div>
 
 
   </body>
