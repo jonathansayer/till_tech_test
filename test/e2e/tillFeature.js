@@ -48,4 +48,17 @@ describe('Cafe Till', function() {
       expect(receipt.getText()).toContain("phone: 16503600708");
     })
   });
+
+  it('must take the name of each customer', function() {
+    nameInput = element(by.className('nameInput'))
+    expect(nameInput.isPresent()).toBe(true);
+  });
+
+  it('must display the name of the customer on the receipt', function() {
+    nameInput = element(by.className('nameInput'));
+    nameInput.sendKeys('Jonathan');
+    button = element(by.buttonText('Add Name'));
+    button.click();
+    expect(receipt.getText()).toContain("Jonathan");
+  })
 });
