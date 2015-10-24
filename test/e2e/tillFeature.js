@@ -22,21 +22,24 @@ describe('Cafe Till', function() {
     expect(total.getText()).toEqual('£3.65')
   })
 
-  it('must show a receipt', function() {
-    expect(receipt.getText()).toContain('Receipt');
-  });
+  describe('the receipt', function() {
 
-  it('must show a list of ordered items on receipt', function() {
-    cappucino.click();
-    tea.click();
-    expect(receipt.getText()).toContain('Cappucino');
-    expect(receipt.getText()).toContain('Tea');
-    expect(receipt.getText()).toNotContain('Tiramisu')
-  });
+    it('must show a receipt', function() {
+      expect(receipt.getText()).toContain('Receipt');
+    });
 
-  it('must show the quantity of items ordered', function() {
-    cappucino.click();
-    cappucino.click();
-    expect(receipt.getText()).toContain('2X Cappucino');
+    it('must show a list of ordered items on receipt', function() {
+      cappucino.click();
+      tea.click();
+      expect(receipt.getText()).toContain('Cappucino');
+      expect(receipt.getText()).toContain('Tea');
+      expect(receipt.getText()).toNotContain('Tiramisu')
+    });
+
+    it('must show the quantity of items ordered', function() {
+      cappucino.click();
+      cappucino.click();
+      expect(receipt.getText()).toContain('2X Cappucino');
+    });
   });
 });
