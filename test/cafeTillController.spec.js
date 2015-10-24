@@ -1,7 +1,7 @@
 describe('cafeTillController', function() {
   beforeEach(module('cafeTill'));
 
-  menu = [
+  info = [
           {
             "shopName": "The Coffee Connection",
             "address": "123 Lakeside Way",
