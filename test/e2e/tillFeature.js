@@ -18,4 +18,9 @@ describe('Cafe Till', function() {
     item_button.click();
     expect(total.getText()).toEqual('£3.65')
   })
+
+  it('must show a receipt', function() {
+    receipt = element(by.className('receipt'))
+    expect(receipt.getText()).toContain('Receipt');
+  });
 });
