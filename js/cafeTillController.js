@@ -1,4 +1,4 @@
-cafeTill.controller('cafeTillController',[function($http){
+cafeTill.controller('cafeTillController',[function(){
 
   var self = this;
   self.total = 0;
