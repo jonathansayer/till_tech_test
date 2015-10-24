@@ -49,16 +49,21 @@ describe('Cafe Till', function() {
     })
   });
 
-  it('must take the name of each customer', function() {
-    nameInput = element(by.className('nameInput'))
-    expect(nameInput.isPresent()).toBe(true);
-  });
+  describe('display customer name', function() {
 
-  it('must display the name of the customer on the receipt', function() {
-    nameInput = element(by.className('nameInput'));
-    nameInput.sendKeys('Jonathan');
-    button = element(by.buttonText('Add Name'));
-    button.click();
-    expect(receipt.getText()).toContain("Jonathan");
-  })
+    beforeEach(function() {
+      nameInput = element(by.className('nameInput'))
+    })
+
+    it('must take the name of each customer', function() {
+      expect(nameInput.isPresent()).toBe(true);
+    });
+
+    it('must display the name of the customer on the receipt', function() {
+      nameInput.sendKeys('Jonathan');
+      button = element(by.buttonText('Add Name'));
+      button.click();
+      expect(receipt.getText()).toContain("Jonathan");
+    });
+  });
 });
