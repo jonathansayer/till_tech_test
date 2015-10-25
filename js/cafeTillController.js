@@ -42,6 +42,7 @@ cafeTill.controller('cafeTillController',[function(){
   }
 
   self.addToCustomers = function(name) {
+    console.log("hello")
     self.customers.push({name:name, order:self.orderedItems});
     self.orderedItems = [];
   }

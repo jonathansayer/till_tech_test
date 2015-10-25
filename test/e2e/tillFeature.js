@@ -2,10 +2,11 @@ describe('Cafe Till', function() {
 
   beforeEach(function() {
     browser.get('http://localhost:8080');
-    total = element(by.binding('searchCtrl.total'))
-    receipt = element(by.className('receipt'))
+    total = element(by.binding('searchCtrl.total'));
+    receipt = element(by.className('receipt'));
+    order = element(by.className('order'));
     cappucino = element(by.buttonText('Cappucino'));
-    tea = element(by.buttonText('Tea'))
+    tea = element(by.buttonText('Tea'));
   })
 
   it('has a title', function() {
@@ -28,18 +29,18 @@ describe('Cafe Till', function() {
       expect(receipt.getText()).toContain('Receipt');
     });
 
-    it('must show a list of ordered items on receipt', function() {
+    it('must show a list of ordered items on order', function() {
       cappucino.click();
       tea.click();
-      expect(receipt.getText()).toContain('Cappucino');
-      expect(receipt.getText()).toContain('Tea');
-      expect(receipt.getText()).toNotContain('Tiramisu')
+      expect(order.getText()).toContain('Cappucino');
+      expect(order.getText()).toContain('Tea');
+      expect(order.getText()).toNotContain('Tiramisu')
     });
 
     it('must show the quantity of items ordered', function() {
       cappucino.click();
       cappucino.click();
-      expect(receipt.getText()).toContain('2X Cappucino');
+      expect(order.getText()).toContain('2X Cappucino');
     });
 
     it('must show the shop information on the reciept', function() {

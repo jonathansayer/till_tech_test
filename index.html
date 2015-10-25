@@ -13,7 +13,7 @@
 
   <body ng-controller = "cafeTillController as searchCtrl">
     <input class="nameInput" ng-model = "searchCtrl.name" type=text>Name of Customer</input>
-    <button class=newCustomer ng-click="searchCtl.nextCustomer" >New Customer</button>
+    <button class=newCustomer ng-click="searchCtrl.addToCustomers(searchCtrl.name)" >New Customer</button>
       </br>
     <button ng-repeat="(key,price) in searchCtrl.menu" ng-click="searchCtrl.increaseTotal(price); searchCtrl.addToOrderedItems(key)" >
       {{key}}
@@ -21,6 +21,11 @@
     <div class="total">
       {{searchCtrl.total |currency : "&pound;"}}
     </div>
+    <div class="order">
+      <div ng-repeat="order in searchCtrl.orderedItems">
+        {{order.quantity}}X {{order.item}}
+      </div>
+    </br>
     <div class="receipt">
       Receipt
       <div class="shopInfo">
@@ -29,9 +34,8 @@
         {{searchCtrl.shopInfo.address}} </br>
         phone: {{searchCtrl.shopInfo.phone}} </br>
       </div>
-      <div class="order" ng-repeat="order in searchCtrl.orderedItems">
-        {{order.quantity}}X {{order.item}}
+      <div class="finalOrder" ng-repeat="info in searchCtrl.customers">
+          {{info.name}}
       </div>
-    </div>
   </body>
 </html>
