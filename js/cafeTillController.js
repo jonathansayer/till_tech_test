@@ -48,7 +48,7 @@ cafeTill.controller('cafeTillController',[function(){
     self.customers.push({name:self.customerName, order:self.orderedItems, total:self.total, tax:self.tax});
     self.orderedItems = [];
     self.total = 0;
-    self.cutomerName = ''
+    self.customerName = ''
   }
 
   }]);

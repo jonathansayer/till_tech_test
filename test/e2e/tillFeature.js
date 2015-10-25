@@ -26,7 +26,7 @@ describe('Cafe Till', function() {
     button = element(by.className("newCustomer"));
     button.click();
     total = element(by.className('finalTotal'))
-    expect(total.getText()).toEqual('£3.65')
+    expect(total.getText()).toContain('£3.65')
   })
 
   describe('the receipt', function() {
@@ -104,5 +104,14 @@ describe('Cafe Till', function() {
       expect(receipt.getText()).toContain("Jonathan","1X Cappucino");
       expect(receipt.getText()).toContain("Melissa", "2X Tea 1X Choc Mousse");
     })
+  })
+
+  it('should display the tax for each customer', function() {
+    nameInput = element(by.className('nameInput'));
+    nameInput.sendKeys('Jonathan');
+    cappucino.click();
+    button = element(by.buttonText('Save Customer'));
+    button.click();
+    expect(receipt.getText()).toContain("Tax: +£0.33")
   })
 });

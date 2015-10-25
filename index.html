@@ -41,7 +41,9 @@
             {{items.quantity}}X {{items.item}}
           </div>
           <div class='finalTotal'>
-              {{info.total |currency : "&pound;"}}
+              Total: {{info.total |currency : "&pound;"}} </br>
+              Tax: +{{info.tax |currency : "&pound;"}} </br>
+              To Pay:{{info.total + info.tax |currency : "&pound;"}}
           </div>
         </br>
       </div>
