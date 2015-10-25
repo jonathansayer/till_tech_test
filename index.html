@@ -24,7 +24,7 @@
     </div>
     <div class="order">
       <div ng-repeat="order in searchCtrl.orderedItems">
-        {{order.quantity}}X {{order.item}}
+        {{order.quantity}}X {{order.item}} {{order.itemTotal |currency : "&pound;"}}
       </div>
     </br>
     <div class="receipt">

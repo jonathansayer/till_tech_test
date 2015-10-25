@@ -72,21 +72,21 @@ describe('cafeTillController', function() {
 
   it('should add ordered items to the ordered array', function() {
     ctrl.addToOrderedItems('Tea',3.65);
-    expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:1}]);
+    expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:1, itemTotal:3.65}]);
   })
 
-  it('should increase the quantity of items have already been ordered', function() {
+  it('should increase the quantity of items that have already been ordered', function() {
     ctrl.addToOrderedItems('Tea',3.65);
     ctrl.addToOrderedItems('Tea',3.65);
-    expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:2}]);
+    expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:2,itemTotal:7.3}]);
   })
 
-  it('should save the order of each customer', function() {
+  it('should save the order of each customer including item totals', function() {
     ctrl.addToOrderedItems('Tea',3.65);
     ctrl.addToOrderedItems('Cappucino',3.85);
     ctrl.customerName = 'Jonathan'
     ctrl.addToCustomers();
-    expect(ctrl.customers).toEqual([{name:"Jonathan",order:[{item:"Tea",quantity:1},{item:"Cappucino",quantity:1}],total:7.5, tax:0.648}]);
+    expect(ctrl.customers).toEqual([{name:"Jonathan",order:[{item:"Tea",quantity:1,itemTotal:3.65},{item:"Cappucino",quantity:1, itemTotal:3.85}],total:7.5, tax:0.648}]);
   })
 
   it('should have no ordered items when a new customer has been added', function() {

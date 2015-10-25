@@ -114,4 +114,13 @@ describe('Cafe Till', function() {
     button.click();
     expect(receipt.getText()).toContain("Tax: +£0.33")
   })
+
+  it('should display the amount for each item', function() {
+    nameInput = element(by.className('nameInput'));
+    nameInput.sendKeys('Jonathan');
+    cappucino.click();
+    cappucino.click();
+    order = element(by.className('order'))
+    expect(order.getText()).toContain('2X Cappucino £7.70');
+  })
 });

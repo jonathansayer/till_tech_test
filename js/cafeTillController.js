@@ -16,10 +16,11 @@ cafeTill.controller('cafeTillController',[function(){
   self.addToOrderedItems = function(item, price){
     self.total += price
     if(self.alreadyOrdered(item) == false){
-      self.orderedItems.push({item: item, quantity:1})}
+      self.orderedItems.push({item: item, quantity:1, itemTotal:price})}
     else{
       index = self.indexOfHash(item)
       self.orderedItems[index].quantity += 1;
+      self.orderedItems[index].itemTotal += price;
     }
   }
 
