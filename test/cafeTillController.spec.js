@@ -84,7 +84,8 @@ describe('cafeTillController', function() {
   it('should save the order of each customer', function() {
     ctrl.addToOrderedItems('Tea',3.65);
     ctrl.addToOrderedItems('Cappucino',3.85);
-    ctrl.addToCustomers('Jonathan');
+    ctrl.customerName = 'Jonathan'
+    ctrl.addToCustomers();
     expect(ctrl.customers).toEqual([{name:"Jonathan",order:[{item:"Tea",quantity:1},{item:"Cappucino",quantity:1}],total:7.5}]);
   })
 
@@ -101,5 +102,6 @@ describe('cafeTillController', function() {
     ctrl.addToCustomers('Jonathan');
     expect(ctrl.total).toEqual(0);
   })
+
 
 })

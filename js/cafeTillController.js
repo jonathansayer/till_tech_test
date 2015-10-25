@@ -42,10 +42,11 @@ cafeTill.controller('cafeTillController',[function(){
     }
   }
 
-  self.addToCustomers = function(name) {
-    self.customers.push({name:name, order:self.orderedItems, total:self.total});
+  self.addToCustomers = function() {
+    self.customers.push({name:self.customerName, order:self.orderedItems, total:self.total});
     self.orderedItems = [];
     self.total = 0;
+    self.cutomerName = ''
   }
 
   }]);

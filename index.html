@@ -12,13 +12,14 @@
   </head>
 
   <body ng-controller = "cafeTillController as searchCtrl">
-    <input class="nameInput" ng-model = "searchCtrl.name" type=text>Name of Customer</input>
-    <button class=newCustomer ng-click="searchCtrl.addToCustomers(searchCtrl.name)" >Save Customer</button>
+    <input class="nameInput" ng-model = "searchCtrl.customerName" type=text>Name of Customer</input>
+    <button class=newCustomer ng-click="searchCtrl.addToCustomers()" >Save Customer</button>
       </br>
     <button ng-repeat="(key,price) in searchCtrl.menu" ng-click="searchCtrl.addToOrderedItems(key,price)" >
       {{key}}
     </button>
     <div class="total">
+      {{searchCtrl.customerName}} </br>
       {{searchCtrl.total |currency : "&pound;"}}
     </div>
     <div class="order">
@@ -29,7 +30,6 @@
     <div class="receipt">
       Receipt
       <div class="shopInfo">
-        {{searchCtrl.name}} </br>
         {{searchCtrl.shopInfo.shopName}} </br>
         {{searchCtrl.shopInfo.address}} </br>
         phone: {{searchCtrl.shopInfo.phone}} </br>
@@ -45,5 +45,6 @@
           </div>
         </br>
       </div>
+    </div>
   </body>
 </html>

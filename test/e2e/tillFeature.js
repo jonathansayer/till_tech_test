@@ -68,6 +68,8 @@ describe('Cafe Till', function() {
 
     it('must display the name of the customer on the receipt', function() {
       nameInput.sendKeys('Jonathan');
+      button = element(by.buttonText('Save Customer'));
+      button.click();
       expect(receipt.getText()).toContain("Jonathan");
     });
   });
