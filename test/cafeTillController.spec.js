@@ -53,54 +53,63 @@ describe('cafeTillController', function() {
     ctrl = $controller('cafeTillController');
    }));
 
-  it('initilises with an menu buttons', function(){
-    expect(ctrl.menu).toBeDefined();
+  describe('when intialised', function() {
+
+    it('initilises with an menu options', function(){
+      expect(ctrl.menu).toBeDefined();
+    });
+
+    it('displays all data',function() {
+      expect(ctrl.menu).toEqual(prices);
+    });
+
+    it('should intialise with an total of 0', function() {
+      expect(ctrl.total).toEqual(0)
+    });
   });
 
-  it('displays all data',function() {
-    expect(ctrl.menu).toEqual(prices);
+  describe('when ordering an item', function() {
+
+    beforeEach(function() {
+      ctrl.addToOrderedItems('Tea',3.65);
+    })
+
+    it('should be able to increase the total by the price of an item', function() {
+      expect(ctrl.total).toEqual(3.65)
+    })
+
+    it('should add ordered items to the ordered array', function() {
+      expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:1, itemTotal:3.65}]);
+    })
+
+    it('should increase the quantity of items that have already been ordered', function() {
+      ctrl.addToOrderedItems('Tea',3.65);
+      expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:2,itemTotal:7.3}]);
+    })
+
+    it('should save the order of each customer including item totals', function() {
+      ctrl.addToOrderedItems('Cappucino',3.85);
+      ctrl.customerName = 'Jonathan'
+      ctrl.addToCustomers();
+      expect(ctrl.customers).toEqual([{name:"Jonathan",order:[{item:"Tea",quantity:1,itemTotal:3.65},{item:"Cappucino",quantity:1, itemTotal:3.85}],total:7.5, tax:0.648}]);
+    })
   });
 
-  it('should intialise with an total of 0', function() {
-    expect(ctrl.total).toEqual(0)
-  })
+  describe('when a new customer is saved', function() {
 
-  it('should be able to increase the total by the price of an item', function() {
-    ctrl.increaseTotal(2.20)
-    expect(ctrl.total).toEqual(2.20)
-  })
+    beforeEach(function() {
+      ctrl.addToOrderedItems('Tea',3.65);
+      ctrl.addToOrderedItems('Cappucino',3.85);
+      ctrl.addToCustomers('Jonathan');
+    })
 
-  it('should add ordered items to the ordered array', function() {
-    ctrl.addToOrderedItems('Tea',3.65);
-    expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:1, itemTotal:3.65}]);
-  })
+    it('should have no ordered items when a new customer has been added', function() {
+      expect(ctrl.orderedItems).toEqual([]);
+    });
 
-  it('should increase the quantity of items that have already been ordered', function() {
-    ctrl.addToOrderedItems('Tea',3.65);
-    ctrl.addToOrderedItems('Tea',3.65);
-    expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:2,itemTotal:7.3}]);
-  })
+    it('should have a total of zero when a new customer is saved', function() {
+      expect(ctrl.total).toEqual(0);
+    });
+  });
 
-  it('should save the order of each customer including item totals', function() {
-    ctrl.addToOrderedItems('Tea',3.65);
-    ctrl.addToOrderedItems('Cappucino',3.85);
-    ctrl.customerName = 'Jonathan'
-    ctrl.addToCustomers();
-    expect(ctrl.customers).toEqual([{name:"Jonathan",order:[{item:"Tea",quantity:1,itemTotal:3.65},{item:"Cappucino",quantity:1, itemTotal:3.85}],total:7.5, tax:0.648}]);
-  })
-
-  it('should have no ordered items when a new customer has been added', function() {
-    ctrl.addToOrderedItems('Tea',3.65);
-    ctrl.addToOrderedItems('Cappucino',3.85);
-    ctrl.addToCustomers('Jonathan');
-    expect(ctrl.orderedItems).toEqual([]);
-  })
-
-  it('should have a total of zero when a new customer is saved', function() {
-    ctrl.addToOrderedItems('Tea',3.65);
-    ctrl.addToOrderedItems('Cappucino',3.85);
-    ctrl.addToCustomers('Jonathan');
-    expect(ctrl.total).toEqual(0);
-  })
-
-})
+});

@@ -9,10 +9,6 @@ cafeTill.controller('cafeTillController',[function(){
   self.tax = 0;
 
 
-  self.increaseTotal = function(price){
-    self.total += price;
-  }
-
   self.addToOrderedItems = function(item, price){
     self.total += price
     if(self.alreadyOrdered(item) == false){
@@ -50,6 +46,10 @@ cafeTill.controller('cafeTillController',[function(){
     self.orderedItems = [];
     self.total = 0;
     self.customerName = ''
+  }
+
+  self.increaseTotal = function(price){
+    self.total += price;
   }
 
   }]);
