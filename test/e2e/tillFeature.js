@@ -7,6 +7,7 @@ describe('Cafe Till', function() {
     order = element(by.className('order'));
     cappucino = element(by.buttonText('Cappucino'));
     tea = element(by.buttonText('Tea'));
+    chocMousse = element(by.buttonText('Choc Mousse'));
   })
 
   it('has a title', function() {
@@ -20,6 +21,11 @@ describe('Cafe Till', function() {
   it('changes the total when an item is selected', function() {
     item_button = element(by.buttonText('Tea'));
     item_button.click();
+    nameInput = element(by.className('nameInput'));
+    nameInput.sendKeys('Jonathan');
+    button = element(by.className("newCustomer"));
+    button.click();
+    total = element(by.className('finalTotal'))
     expect(total.getText()).toEqual('£3.65')
   })
 
@@ -71,13 +77,30 @@ describe('Cafe Till', function() {
     it('must be able to display multiple names', function() {
       nameInput = element(by.className('nameInput'));
       nameInput.sendKeys('Jonathan');
-      button = element(by.buttonText('New Customer'));
+      button = element(by.buttonText('Save Customer'));
       button.click();
       nameInput.clear();
       nameInput.sendKeys("Melissa");
       button.click();
       expect(receipt.getText()).toContain("Jonathan");
       expect(receipt.getText()).toContain("Melissa");
+    })
+
+    it('must display the order of multiple customers', function() {
+      nameInput = element(by.className('nameInput'));
+      nameInput.sendKeys('Jonathan');
+      cappucino.click();
+      button = element(by.buttonText('Save Customer'));
+      button.click();
+      nameInput.clear();
+      nameInput.sendKeys("Melissa");
+      tea.click();
+      tea.click();
+      chocMousse.click();
+      button.click();
+      nameInput.clear();
+      expect(receipt.getText()).toContain("Jonathan","1X Cappucino");
+      expect(receipt.getText()).toContain("Melissa", "2X Tea 1X Choc Mousse");
     })
   })
 });

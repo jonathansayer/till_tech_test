@@ -12,7 +12,8 @@ cafeTill.controller('cafeTillController',[function(){
     self.total += price;
   }
 
-  self.addToOrderedItems = function(item){
+  self.addToOrderedItems = function(item, price){
+    self.total += price
     if(self.alreadyOrdered(item) == false){
       self.orderedItems.push({item: item, quantity:1})}
     else{
@@ -42,9 +43,9 @@ cafeTill.controller('cafeTillController',[function(){
   }
 
   self.addToCustomers = function(name) {
-    console.log("hello")
-    self.customers.push({name:name, order:self.orderedItems});
+    self.customers.push({name:name, order:self.orderedItems, total:self.total});
     self.orderedItems = [];
+    self.total = 0;
   }
 
   }]);
