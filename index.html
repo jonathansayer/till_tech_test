@@ -13,6 +13,7 @@
 
   <body ng-controller = "cafeTillController as searchCtrl">
     <input class="nameInput" ng-model = "searchCtrl.name" type=text>Name of Customer</input>
+    <button class=newCustomer ng-click="searchCtl.nextCustomer" >New Customer</button>
       </br>
     <button ng-repeat="(key,price) in searchCtrl.menu" ng-click="searchCtrl.increaseTotal(price); searchCtrl.addToOrderedItems(key)" >
       {{key}}

@@ -5,6 +5,8 @@ cafeTill.controller('cafeTillController',[function(){
   self.shopInfo = info[0]
   self.menu = info[0].prices[0]
   self.orderedItems = [];
+  self.customers = []
+
 
   self.increaseTotal = function(price){
     self.total += price;
@@ -37,7 +39,11 @@ cafeTill.controller('cafeTillController',[function(){
       if(self.orderedItems[i].item == item)
         return i;
     }
+  }
 
+  self.addToCustomers = function(name) {
+    self.customers.push({name:name, order:self.orderedItems});
+    self.orderedItems = [];
   }
 
   }]);

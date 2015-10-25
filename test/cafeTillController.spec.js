@@ -75,10 +75,22 @@ describe('cafeTillController', function() {
     expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:1}]);
   })
 
-  it('should inrease the quantity of items have already been ordered', function() {
+  it('should increase the quantity of items have already been ordered', function() {
     ctrl.addToOrderedItems('Tea');
     ctrl.addToOrderedItems('Tea');
     expect(ctrl.orderedItems).toEqual([{item:'Tea', quantity:2}]);
+  })
+
+  it('should save the order of each customer', function() {
+    ctrl.orderedItems = ['Tea', 'Cappucino']
+    ctrl.addToCustomers('Jonathan');
+    expect(ctrl.customers).toEqual([{name:"Jonathan",order:["Tea","Cappucino"]}]);
+  })
+
+  it('should have no ordered items when a new customer has been added', function() {
+    ctrl.orderedItems = ['Tea','Cappucino'];
+    ctrl.addToCustomers('Jonathan');
+    expect(ctrl.orderedItems).toEqual([]);
   })
 
 })

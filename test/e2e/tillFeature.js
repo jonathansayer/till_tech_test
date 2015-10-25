@@ -64,4 +64,19 @@ describe('Cafe Till', function() {
       expect(receipt.getText()).toContain("Jonathan");
     });
   });
+
+  describe('multiple receipts', function() {
+
+    it('must be able to display multiple names', function() {
+      nameInput = element(by.className('nameInput'));
+      nameInput.sendKeys('Jonathan');
+      button = element(by.buttonText('New Customer'));
+      button.click();
+      nameInput.clear();
+      nameInput.sendKeys("Melissa");
+      button.click();
+      expect(receipt.getText()).toContain("Jonathan");
+      expect(receipt.getText()).toContain("Melissa");
+    })
+  })
 });
