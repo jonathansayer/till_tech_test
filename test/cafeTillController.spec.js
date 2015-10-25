@@ -86,7 +86,7 @@ describe('cafeTillController', function() {
     ctrl.addToOrderedItems('Cappucino',3.85);
     ctrl.customerName = 'Jonathan'
     ctrl.addToCustomers();
-    expect(ctrl.customers).toEqual([{name:"Jonathan",order:[{item:"Tea",quantity:1},{item:"Cappucino",quantity:1}],total:7.5}]);
+    expect(ctrl.customers).toEqual([{name:"Jonathan",order:[{item:"Tea",quantity:1},{item:"Cappucino",quantity:1}],total:7.5, tax:0.648}]);
   })
 
   it('should have no ordered items when a new customer has been added', function() {
@@ -102,6 +102,5 @@ describe('cafeTillController', function() {
     ctrl.addToCustomers('Jonathan');
     expect(ctrl.total).toEqual(0);
   })
-
 
 })
