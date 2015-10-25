@@ -22,8 +22,6 @@ module.exports = function(config) {
       'bower_components/karma-read-json/karma-read-json.js',
       'js/**/*.js',
       'test/**/*.spec.js'
-
-      {pattern: '*.json', included: false},
     ],
 
 
