@@ -108,4 +108,21 @@ describe('Cafe Till', function() {
     cappucino.click();
     expect(order.getText()).toContain('2X Cappucino £7.70');
   })
+
+  describe('when taking payment', function() {
+
+    it('should be told how much money the customer has given', function() {
+      nameInput.sendKeys('Jonathan');
+      tea.click();
+      cappucino.click();
+      paymentBtn = element(by.className('JonathanPayment'))
+      paymentBtn.click();
+      cashAmount = element(by.className('cashAmount'));
+      cashAmount.sendKeys("10.00")
+      change = element(by.className('change'));
+      change.click();
+      payment = element(by.className('payment'));
+      expect(payment.getText()).toContain("Change: £1.85");
+    })
+  })
 });
