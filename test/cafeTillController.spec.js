@@ -152,6 +152,6 @@ describe('cafeTillController', function() {
       ctrl.addToOrderedItems('Tea',3.65);
       expect(ctrl.total).toEqual(49.99);
     });
-  })
+  });
 
 });
