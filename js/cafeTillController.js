@@ -13,6 +13,7 @@ cafeTill.controller('cafeTillController',[function(){
 
   self.addToOrderedItems = function(item, price){
     self.total += price
+    self.applyDiscount();
     if(self.alreadyOrdered(item) == false){
       self.orderedItems.push({item: item, quantity:1, itemTotal:price})}
     else{
@@ -50,10 +51,6 @@ cafeTill.controller('cafeTillController',[function(){
     self.customerName = ''
   }
 
-  self.increaseTotal = function(price){
-    self.total += price;
-  }
-
   self.pay = function() {
     self.payment = true;
   };
@@ -61,11 +58,16 @@ cafeTill.controller('cafeTillController',[function(){
   self.viewChange = function(total) {
     self.showChange = true;
     self.calculateChange(total);
-
   }
 
   self.calculateChange = function(total) {
     self.change = self.cashAmount - total;
+  }
+
+  self.applyDiscount = function() {
+    if(self.total >= 50){
+      self.total *= 0.95;
+    }
   }
 
   }]);

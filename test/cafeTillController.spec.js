@@ -139,4 +139,19 @@ describe('cafeTillController', function() {
     })
   })
 
+  describe('discounts', function() {
+
+    it('should apply a 5% discount on order over £50', function() {
+      ctrl.total = 46.35;
+      ctrl.addToOrderedItems('Tea',3.65);
+      expect(ctrl.total).toEqual(47.50);
+    });
+
+    it('should not apply a discount on an order under £50', function() {
+      ctrl.total = 46.34;
+      ctrl.addToOrderedItems('Tea',3.65);
+      expect(ctrl.total).toEqual(49.99);
+    });
+  })
+
 });
