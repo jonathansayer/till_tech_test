@@ -112,4 +112,31 @@ describe('cafeTillController', function() {
     });
   });
 
+  describe('taking payment', function() {
+
+    it('should be initiated with a payment of false', function() {
+      expect(ctrl.payment).toEqual(false);
+    });
+
+    it('should change payment status to true when pay function is called', function() {
+      ctrl.pay();
+      expect(ctrl.payment).toEqual(true);
+    })
+
+    it('should not show change before taking a payment', function() {
+      expect(ctrl.showChange).toEqual(false);
+    })
+
+    it('should show change when payment is taken', function() {
+      ctrl.viewChange();
+      expect(ctrl.showChange).toEqual(true);
+    })
+
+    it('should be able to calcuate the correct change', function() {
+      ctrl.cashAmount = 10.00;
+      ctrl.calculateChange(8.50);
+      expect(ctrl.change).toEqual(1.50);
+    })
+  })
+
 });

@@ -11,31 +11,31 @@
     <script src="hipstercoffee.json"></script>
   </head>
 
-  <body ng-controller = "cafeTillController as searchCtrl">
-    <input class="nameInput" ng-model = "searchCtrl.customerName" type=text>Name of Customer</input>
-    <button class=newCustomer ng-click="searchCtrl.addToCustomers()" >Save Customer</button>
+  <body ng-controller = "cafeTillController as ctrl">
+    <input class="nameInput" ng-model = "ctrl.customerName" type=text>Name of Customer</input>
+    <button class=newCustomer ng-click="ctrl.addToCustomers()" >Save Customer</button>
       </br>
-    <button ng-repeat="(key,price) in searchCtrl.menu" ng-click="searchCtrl.addToOrderedItems(key,price)" >
+    <button ng-repeat="(key,price) in ctrl.menu" ng-click="ctrl.addToOrderedItems(key,price)" >
       {{key}}
     </button>
     <div class="total">
-      {{searchCtrl.customerName}} </br>
-      {{searchCtrl.total |currency : "&pound;"}}
+      {{ctrl.customerName}} </br>
+      {{ctrl.total |currency : "&pound;"}}
     </div>
     <div class="order">
-      <div ng-repeat="order in searchCtrl.orderedItems">
+      <div ng-repeat="order in ctrl.orderedItems">
         {{order.quantity}}X {{order.item}} {{order.itemTotal |currency : "&pound;"}}
       </div>
     </br>
     <div class="receipt">
       Receipt
       <div class="shopInfo">
-        {{searchCtrl.shopInfo.shopName}} </br>
-        {{searchCtrl.shopInfo.address}} </br>
-        phone: {{searchCtrl.shopInfo.phone}} </br>
+        {{ctrl.shopInfo.shopName}} </br>
+        {{ctrl.shopInfo.address}} </br>
+        phone: {{ctrl.shopInfo.phone}} </br>
       </br>
       </div>
-      <div class="finalOrder" ng-repeat="info in searchCtrl.customers">
+      <div class="finalOrder" ng-repeat="info in ctrl.customers">
           {{info.name}}
           <div class="finalItems" ng-repeat="items in info.order">
             {{items.quantity}}X {{items.item}}
@@ -44,6 +44,15 @@
               Total: {{info.total |currency : "&pound;"}} </br>
               Tax: +{{info.tax |currency : "&pound;"}} </br>
               To Pay:{{info.total + info.tax |currency : "&pound;"}}
+          </div>
+          <button class="{{info.name}}Payment" ng-click="ctrl.pay()">Take Payment</button>
+          <div ng-show="ctrl.payment" class="payment">
+            <input type="number" step="0.01" class="cashAmount" ng-model="ctrl.cashAmount">Cash Amount</input>
+          </br>
+            <button class="change" ng-click="ctrl.viewChange(info.total + info.tax)">Calculate Change</button>
+            <div ng-show="ctrl.showChange">
+            Change: {{ctrl.change | currency :"&pound;"}}
+            </div>
           </div>
         </br>
       </div>

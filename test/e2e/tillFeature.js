@@ -3,7 +3,7 @@ describe('Cafe Till', function() {
   beforeEach(function() {
     browser.get('http://localhost:8080');
     nameInput = element(by.className('nameInput'));
-    total = element(by.binding('searchCtrl.total'));
+    total = element(by.binding('ctrl.total'));
     saveCustomerBtn = element(by.buttonText('Save Customer'))
     receipt = element(by.className('receipt'));
     order = element(by.className('order'));
@@ -115,6 +115,7 @@ describe('Cafe Till', function() {
       nameInput.sendKeys('Jonathan');
       tea.click();
       cappucino.click();
+      saveCustomerBtn.click();
       paymentBtn = element(by.className('JonathanPayment'))
       paymentBtn.click();
       cashAmount = element(by.className('cashAmount'));
@@ -122,7 +123,7 @@ describe('Cafe Till', function() {
       change = element(by.className('change'));
       change.click();
       payment = element(by.className('payment'));
-      expect(payment.getText()).toContain("Change: £1.85");
+      expect(payment.getText()).toContain("Change: £1.85")
     })
   })
 });
