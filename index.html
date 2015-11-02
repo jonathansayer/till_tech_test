@@ -19,7 +19,7 @@
       {{key}}
     </button>
     <div class="total">
-      {{ctrl.customerName}} </br>
+      {{ctrl.newCustomerName}} </br>
       {{ctrl.total |currency : "&pound;"}}
     </div>
     <div class="order">
@@ -45,8 +45,8 @@
               Tax: +{{customer.tax |currency : "&pound;"}} </br>
               To Pay:{{customer.total + info.tax |currency : "&pound;"}}
           </div>
-          <button class="{{customer.name}}Payment" ng-click="ctrl.pay()">Take Payment</button>
-          <div ng-show="ctrl.payment" class="payment">
+          <button class="{{customer.name}}PaymentBtn" ng-click="ctrl.pay(customer.name)">Take Payment</button>
+          <div ng-show="customer.showPayment" class="{{customer.name}}Payment">
             <input type="number" step="0.01" class="cashAmount" ng-model="ctrl.cashAmount">Cash Amount</input>
           </br>
             <button class="change" ng-click="ctrl.viewChange(customer.total + customer.tax)">Calculate Change</button>

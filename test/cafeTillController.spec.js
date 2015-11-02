@@ -89,9 +89,18 @@ describe('cafeTillController', function() {
 
     it('should save the order of each customer including item totals', function() {
       ctrl.addToOrderedItems('Cappucino',3.85);
-      ctrl.customerName = 'Jonathan'
+      ctrl.newCustomerName = 'Jonathan'
       ctrl.addToCustomers();
-      expect(ctrl.customers).toEqual([{name:"Jonathan",order:[{item:"Tea",quantity:1,itemTotal:3.65},{item:"Cappucino",quantity:1, itemTotal:3.85}],total:7.5, tax:0.648}]);
+      expect(ctrl.customers).toEqual([{name:"Jonathan",
+                                      order:[{item:"Tea",
+                                            quantity:1,
+                                            itemTotal:3.65},
+                                            {item:"Cappucino",
+                                            quantity:1,
+                                            itemTotal:3.85}],
+                                      total:7.5,
+                                      tax:0.648,
+                                      showPayment:false}]);
     })
   });
 
@@ -115,12 +124,14 @@ describe('cafeTillController', function() {
   describe('taking payment', function() {
 
     it('should be initiated with a payment of false', function() {
-      expect(ctrl.payment).toEqual(false);
+      expect(ctrl.showPayment).toEqual(false);
     });
 
     it('should change payment status to true when pay function is called', function() {
-      ctrl.pay();
-      expect(ctrl.payment).toEqual(true);
+      ctrl.customers = [{name:'Jonathan',
+                        showPayment: false}]
+      ctrl.pay('Jonathan');
+      expect(ctrl.customers[0].showPayment).toEqual(true);
     })
 
     it('should not show change before taking a payment', function() {

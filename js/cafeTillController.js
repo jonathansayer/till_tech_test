@@ -1,13 +1,13 @@
 cafeTill.controller('cafeTillController',[function(){
 
   var self = this;
+  self.customers = []
   self.total = 0;
   self.shopInfo = info[0]
   self.menu = info[0].prices[0]
   self.orderedItems = [];
-  self.customers = []
   self.tax = 0;
-  self.payment=false;
+  self.showPayment=false;
   self.showChange=false;
 
 
@@ -45,14 +45,19 @@ cafeTill.controller('cafeTillController',[function(){
 
   self.addToCustomers = function() {
     self.tax = self.total * 0.0864;
-    self.customers.push({name:self.newCustomerName, order:self.orderedItems, total:self.total, tax:self.tax});
+    self.customers.push({name:self.newCustomerName,
+                          order:self.orderedItems,
+                          total:self.total,
+                          tax:self.tax,
+                          showPayment: false});
     self.orderedItems = [];
     self.total = 0;
-    self.customerName = ''
+    self.newCustomerName = ''
   }
 
-  self.pay = function() {
-    self.payment = true;
+  self.pay = function(name) {
+    index = self.indexOfCustomer(name);
+    self.customers[index].showPayment = true;
   };
 
   self.viewChange = function(total) {
@@ -61,8 +66,6 @@ cafeTill.controller('cafeTillController',[function(){
   }
 
   self.calculateChange = function(total) {
-    console.log(self.change)
-    console.log(total)
     self.change = self.cashAmount - total;
   }
 
@@ -71,5 +74,13 @@ cafeTill.controller('cafeTillController',[function(){
       self.total *= 0.95;
     }
   }
+
+  self.indexOfCustomer = function(name) {
+    for(i = 0; i <= self.customers.length; i++){
+      if(self.customers[i].name == name){
+        return i;
+      };
+    };
+  };
 
   }]);

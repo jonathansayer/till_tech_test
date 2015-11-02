@@ -116,14 +116,26 @@ describe('Cafe Till', function() {
       tea.click();
       cappucino.click();
       saveCustomerBtn.click();
-      paymentBtn = element(by.className('JonathanPayment'))
+      paymentBtn = element(by.className('JonathanPaymentBtn'))
       paymentBtn.click();
       cashAmount = element(by.className('cashAmount'));
       cashAmount.sendKeys("10.00")
       change = element(by.className('change'));
       change.click();
-      payment = element(by.className('payment'));
+      payment = element(by.className('JonathanPayment'));
       expect(payment.getText()).toContain("Change: £1.85")
+    })
+
+    it('should only display the payment amount for one customer when payment button is selected', function() {
+      nameInput.sendKeys('Jonathan');
+      tea.click();
+      saveCustomerBtn.click();
+      nameInput.sendKeys('Melissa');
+      cappucino.click();
+      saveCustomerBtn.click();
+      jonPaymentBtn = element(by.className('JonathanPaymentBtn'))
+      jonPaymentBtn.click();
+      expect(element(by.className('MelissaCashAmount')).isPresent()).toEqual(false);
     })
   })
 });
