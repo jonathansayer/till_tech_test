@@ -83,4 +83,10 @@ cafeTill.controller('cafeTillController',[function(){
     };
   };
 
+  self.removeFromOrderedItems = function(item, price) {
+    self.total -= price;
+    index = self.indexOfHash(item);
+    self.orderedItems.splice(index,1);
+  }
+
   }]);

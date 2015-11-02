@@ -25,6 +25,7 @@
     <div class="order">
       <div ng-repeat="order in ctrl.orderedItems">
         {{order.quantity}}X {{order.item}} {{order.itemTotal |currency : "&pound;"}}
+        <button class='{{order.item}}Remove' ng-click="ctrl.removeFromOrderedItems(order.item, order.itemTotal)"> &#x2717 </button> 
       </div>
     </br>
     <div class="receipt">

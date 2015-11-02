@@ -165,4 +165,24 @@ describe('cafeTillController', function() {
     });
   });
 
+  describe('remove items from orders', function() {
+
+    it('should reduce the total by the price of the item', function() {
+      ctrl.orderedItems = [{item:'Tea',
+                            quantity:1,
+                            itemTotal:3.65}];
+      ctrl.total = 10.00;
+      ctrl.removeFromOrderedItems('Tea', 3.65);
+      expect(ctrl.total).toEqual(6.35);
+    })
+
+    it('should remove the item from the ordered items', function() {
+      ctrl.orderedItems = [{item:'Tea',
+                            quantity:1,
+                            itemTotal:3.65}];
+      ctrl.removeFromOrderedItems('Tea', 3.65);
+      expect(ctrl.orderedItems).toEqual([]);
+    });
+  });
+
 });

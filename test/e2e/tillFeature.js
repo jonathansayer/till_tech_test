@@ -147,6 +147,17 @@ describe('Cafe Till', function() {
       expect(element(by.className('JonathanCashAmount')).isDisplayed()).toEqual(true);
       jonPaymentBtn.click();
       expect(element(by.className('JonathanCashAmount')).isDisplayed()).toEqual(false);
-    })
+    });
+  });
+
+  it('should allow for an item to removed from the order list', function() {
+    nameInput.sendKeys('Jonathan');
+    tea.click();
+    cappucino.click();
+    order = element(by.className('order'));
+    teaRemove = element(by.className('TeaRemove'));
+    teaRemove.click();
+    expect(order.getText()).toNotContain('Tea');
+    expect(order.getText()).toContain('Cappucino');
   })
 });
