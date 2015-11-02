@@ -57,7 +57,7 @@ cafeTill.controller('cafeTillController',[function(){
 
   self.pay = function(name) {
     index = self.indexOfCustomer(name);
-    self.customers[index].showPayment = true;
+    self.customers[index].showPayment = !self.customers[index].showPayment;
   };
 
   self.viewChange = function(total) {

@@ -118,7 +118,7 @@ describe('Cafe Till', function() {
       saveCustomerBtn.click();
       paymentBtn = element(by.className('JonathanPaymentBtn'))
       paymentBtn.click();
-      cashAmount = element(by.className('cashAmount'));
+      cashAmount = element(by.className('JonathanCashAmount'));
       cashAmount.sendKeys("10.00")
       change = element(by.className('change'));
       change.click();
@@ -135,7 +135,18 @@ describe('Cafe Till', function() {
       saveCustomerBtn.click();
       jonPaymentBtn = element(by.className('JonathanPaymentBtn'))
       jonPaymentBtn.click();
-      expect(element(by.className('MelissaCashAmount')).isPresent()).toEqual(false);
+      expect(element(by.className('MelissaCashAmount')).isDisplayed()).toEqual(false);
+    });
+
+    it('should hide the payment options after payent button has been played again', function() {
+      nameInput.sendKeys('Jonathan');
+      tea.click();
+      saveCustomerBtn.click();
+      jonPaymentBtn = element(by.className('JonathanPaymentBtn'))
+      jonPaymentBtn.click();
+      expect(element(by.className('JonathanCashAmount')).isDisplayed()).toEqual(true);
+      jonPaymentBtn.click();
+      expect(element(by.className('JonathanCashAmount')).isDisplayed()).toEqual(false);
     })
   })
 });
