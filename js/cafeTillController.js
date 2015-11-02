@@ -61,6 +61,8 @@ cafeTill.controller('cafeTillController',[function(){
   }
 
   self.calculateChange = function(total) {
+    console.log(self.change)
+    console.log(total)
     self.change = self.cashAmount - total;
   }
 
