@@ -45,7 +45,7 @@ cafeTill.controller('cafeTillController',[function(){
 
   self.addToCustomers = function() {
     self.tax = self.total * 0.0864;
-    self.customers.push({name:self.customerName, order:self.orderedItems, total:self.total, tax:self.tax});
+    self.customers.push({name:self.newCustomerName, order:self.orderedItems, total:self.total, tax:self.tax});
     self.orderedItems = [];
     self.total = 0;
     self.customerName = ''

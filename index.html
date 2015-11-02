@@ -12,7 +12,7 @@
   </head>
 
   <body ng-controller = "cafeTillController as ctrl">
-    <input class="nameInput" ng-model = "ctrl.customerName" type=text>Name of Customer</input>
+    <input class="nameInput" ng-model = "ctrl.newCustomerName" type=text>Name of Customer</input>
     <button class="newCustomer" ng-click="ctrl.addToCustomers()" >Save Customer</button>
       </br>
     <button ng-repeat="(key,price) in ctrl.menu" ng-click="ctrl.addToOrderedItems(key,price)" >
