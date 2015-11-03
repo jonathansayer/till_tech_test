@@ -100,7 +100,8 @@ describe('cafeTillController', function() {
                                             itemTotal:3.85}],
                                       total:7.5,
                                       tax:0.648,
-                                      showPayment:false}]);
+                                      showPayment:false,
+                                      discount:0}]);
     })
   });
 
@@ -155,7 +156,7 @@ describe('cafeTillController', function() {
     it('should apply a 5% discount on order over £50', function() {
       ctrl.total = 46.35;
       ctrl.addToOrderedItems('Tea',3.65);
-      expect(ctrl.total).toEqual(47.50);
+      expect(ctrl.discount).toEqual(2.5);
     });
 
     it('should not apply a discount on an order under £50', function() {
@@ -163,6 +164,17 @@ describe('cafeTillController', function() {
       ctrl.addToOrderedItems('Tea',3.65);
       expect(ctrl.total).toEqual(49.99);
     });
+
+    it('should store the discount value', function() {
+      ctrl.newCustomer = 'Jonathan';
+      ctrl.addToOrderedItems('Affogato', 14.8);
+      ctrl.addToOrderedItems('Affogato', 14.8);
+      ctrl.addToOrderedItems('Affogato', 14.8);
+      ctrl.addToOrderedItems('Choc Mousse', 8.20);
+      ctrl.addToCustomers();
+      expect(ctrl.customers[0].discount).toEqual(2.63);
+
+    })
   });
 
   describe('remove items from orders', function() {

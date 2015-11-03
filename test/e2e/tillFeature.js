@@ -10,6 +10,7 @@ describe('Cafe Till', function() {
     cappucino = element(by.buttonText('Cappucino'));
     tea = element(by.buttonText('Tea'));
     chocMousse = element(by.buttonText('Choc Mousse'));
+    affogato = element(by.buttonText('Affogato'));
   });
 
   it('has a title', function() {
@@ -152,5 +153,14 @@ describe('Cafe Till', function() {
     teaRemove.click();
     expect(order.getText()).toNotContain('Tea');
     expect(order.getText()).toContain('Cappucino');
+  });
+
+  it('should display the discount (5% off orders over £50)', function() {
+    nameInput.sendKeys('Jonathan');
+    affogato.click();
+    affogato.click();
+    affogato.click();
+    chocMousse.click();
+    expect(order.getText()).toContain('- £2.63');
   });
 });
