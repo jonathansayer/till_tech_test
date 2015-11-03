@@ -10,7 +10,7 @@ describe('Cafe Till', function() {
     cappucino = element(by.buttonText('Cappucino'));
     tea = element(by.buttonText('Tea'));
     chocMousse = element(by.buttonText('Choc Mousse'));
-  })
+  });
 
   it('has a title', function() {
     expect(browser.getTitle()).toEqual('Cafe Till');
@@ -20,14 +20,14 @@ describe('Cafe Till', function() {
 
     it('the total is displayed at the start', function() {
       expect(total.getText()).toEqual('£0.00')
-    })
+    });
 
     it('changes the total when an item is selected', function() {
       tea.click();
       nameInput.sendKeys('Jonathan');
       expect(total.getText()).toContain('£3.65')
-    })
-  })
+    });
+  });
 
   describe('the receipt', function() {
 
@@ -53,7 +53,7 @@ describe('Cafe Till', function() {
       expect(receipt.getText()).toContain("The Coffee Connection");
       expect(receipt.getText()).toContain("123 Lakeside Way");
       expect(receipt.getText()).toContain("phone: 16503600708");
-    })
+    });
   });
 
   describe('display customer name', function() {
@@ -99,14 +99,14 @@ describe('Cafe Till', function() {
     cappucino.click();
     saveCustomerBtn.click();
     expect(receipt.getText()).toContain("Tax: +£0.33")
-  })
+  });
 
   it('should display the amount for each item', function() {
     nameInput.sendKeys('Jonathan');
     cappucino.click();
     cappucino.click();
     expect(order.getText()).toContain('2X Cappucino £7.70');
-  })
+  });
 
   describe('when taking payment', function() {
 
@@ -126,7 +126,7 @@ describe('Cafe Till', function() {
       change.click();
       payment = element(by.className('JonathanPayment'));
       expect(payment.getText()).toContain("Change: £1.85")
-    })
+    });
 
     it('should only display the payment amount for one customer when payment button is selected', function() {
       nameInput.sendKeys('Melissa');
@@ -152,5 +152,5 @@ describe('Cafe Till', function() {
     teaRemove.click();
     expect(order.getText()).toNotContain('Tea');
     expect(order.getText()).toContain('Cappucino');
-  })
+  });
 });
