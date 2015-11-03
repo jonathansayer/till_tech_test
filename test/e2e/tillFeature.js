@@ -161,6 +161,8 @@ describe('Cafe Till', function() {
     affogato.click();
     affogato.click();
     chocMousse.click();
-    expect(order.getText()).toContain('- £2.63');
+    saveCustomerBtn.click();
+    JonFinalOrder = element(by.className('JonathanFinalTotal'));
+    expect(JonFinalOrder.getText()).toContain('- £2.63');
   });
 });

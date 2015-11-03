@@ -14,7 +14,6 @@ cafeTill.controller('cafeTillController',[function(){
 
   self.addToOrderedItems = function(item, price){
     self.total += Math.round(price * 100)/ 100
-    console.log(self.total)
     self.applyDiscount();
     if(self.alreadyOrdered(item) == false){
       self.orderedItems.push({item: item, quantity:1, itemTotal:price})}
@@ -46,8 +45,8 @@ cafeTill.controller('cafeTillController',[function(){
   }
 
   self.addToCustomers = function() {
-    self.tax = self.total * 0.0864;
     self.applyDiscount();
+    self.tax = self.discountedTotal * 0.0864;
     self.customers.push({name:self.newCustomerName,
                           order:self.orderedItems,
                           total:self.total,
@@ -76,6 +75,10 @@ cafeTill.controller('cafeTillController',[function(){
   self.applyDiscount = function() {
     if(self.total >= 50){
       self.discount = Math.round(self.total * 0.05 * 100) /100;
+      self.discountedTotal = self.total - self.discount
+    }
+    else{
+      self.discountedTotal = self.total;
     }
   }
 
