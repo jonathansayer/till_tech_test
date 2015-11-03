@@ -72,16 +72,7 @@ describe('Cafe Till', function() {
 
   describe('multiple receipts', function() {
 
-    it('must be able to display multiple names', function() {
-      nameInput.sendKeys('Jonathan');
-      saveCustomerBtn.click();
-      nameInput.sendKeys("Melissa");
-      saveCustomerBtn.click();
-      expect(receipt.getText()).toContain("Jonathan");
-      expect(receipt.getText()).toContain("Melissa");
-    })
-
-    it('must display the order of multiple customers', function() {
+    beforeEach(function() {
       nameInput.sendKeys('Jonathan');
       cappucino.click();
       saveCustomerBtn.click();
@@ -90,10 +81,18 @@ describe('Cafe Till', function() {
       tea.click();
       chocMousse.click();
       saveCustomerBtn.click();
+    });
+
+    it('must be able to display multiple names', function() {
+      expect(receipt.getText()).toContain("Jonathan");
+      expect(receipt.getText()).toContain("Melissa");
+    });
+
+    it('must display the order of multiple customers', function() {
       expect(receipt.getText()).toContain("Jonathan","1X Cappucino");
       expect(receipt.getText()).toContain("Melissa", "2X Tea 1X Choc Mousse");
-    })
-  })
+    });
+  });
 
   it('should display the tax for each customer', function() {
     nameInput.sendKeys('Jonathan');
@@ -111,15 +110,18 @@ describe('Cafe Till', function() {
 
   describe('when taking payment', function() {
 
-    it('should be told how much money the customer has given', function() {
+    beforeEach(function() {
       nameInput.sendKeys('Jonathan');
       tea.click();
       cappucino.click();
       saveCustomerBtn.click();
-      paymentBtn = element(by.className('JonathanPaymentBtn'))
-      paymentBtn.click();
-      cashAmount = element(by.className('JonathanCashAmount'));
-      cashAmount.sendKeys("10.00")
+      jonPaymentBtn = element(by.className('JonathanPaymentBtn'))
+      jonCashAmount = element(by.className('JonathanCashAmount'));
+    });
+
+    it('should be told how much money the customer has given', function() {
+      jonPaymentBtn.click();
+      jonCashAmount.sendKeys("10.00")
       change = element(by.className('change'));
       change.click();
       payment = element(by.className('JonathanPayment'));
@@ -127,26 +129,18 @@ describe('Cafe Till', function() {
     })
 
     it('should only display the payment amount for one customer when payment button is selected', function() {
-      nameInput.sendKeys('Jonathan');
-      tea.click();
-      saveCustomerBtn.click();
       nameInput.sendKeys('Melissa');
       cappucino.click();
       saveCustomerBtn.click();
-      jonPaymentBtn = element(by.className('JonathanPaymentBtn'))
       jonPaymentBtn.click();
       expect(element(by.className('MelissaCashAmount')).isDisplayed()).toEqual(false);
     });
 
     it('should hide the payment options after payent button has been played again', function() {
-      nameInput.sendKeys('Jonathan');
-      tea.click();
-      saveCustomerBtn.click();
-      jonPaymentBtn = element(by.className('JonathanPaymentBtn'))
       jonPaymentBtn.click();
-      expect(element(by.className('JonathanCashAmount')).isDisplayed()).toEqual(true);
+      expect(jonCashAmount.isDisplayed()).toEqual(true);
       jonPaymentBtn.click();
-      expect(element(by.className('JonathanCashAmount')).isDisplayed()).toEqual(false);
+      expect(jonCashAmount.isDisplayed()).toEqual(false);
     });
   });
 
@@ -154,7 +148,6 @@ describe('Cafe Till', function() {
     nameInput.sendKeys('Jonathan');
     tea.click();
     cappucino.click();
-    order = element(by.className('order'));
     teaRemove = element(by.className('TeaRemove'));
     teaRemove.click();
     expect(order.getText()).toNotContain('Tea');
