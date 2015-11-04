@@ -137,12 +137,13 @@ describe('Cafe Till', function() {
       expect(element(by.className('MelissaCashAmount')).isDisplayed()).toEqual(false);
     });
 
-    it('should hide the payment options after payent button has been played again', function() {
+    it('should hide the payment options after payment button has been played again', function() {
       jonPaymentBtn.click();
       expect(jonCashAmount.isDisplayed()).toEqual(true);
       jonPaymentBtn.click();
       expect(jonCashAmount.isDisplayed()).toEqual(false);
     });
+
   });
 
   it('should allow for an item to removed from the order list', function() {
