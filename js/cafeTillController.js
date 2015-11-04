@@ -46,30 +46,34 @@ cafeTill.controller('cafeTillController',[function(){
 
   self.addToCustomers = function() {
     self.applyDiscount();
-    self.tax = self.discountedTotal * 0.0864;
+    self.tax = self.total * 0.0864;
     self.customers.push({name:self.newCustomerName,
                           order:self.orderedItems,
                           total:self.total,
                           tax:self.tax,
                           showPayment: false,
-                          discount:self.discount});
+                          discount:self.discount,
+                          cashAmount:0,
+                          change:0});
     self.orderedItems = [];
     self.total = 0;
     self.newCustomerName = ''
   }
 
   self.pay = function(name) {
-    index = self.indexOfCustomer(name);
+    var index = self.indexOfCustomer(name);
     self.customers[index].showPayment = !self.customers[index].showPayment;
   };
 
-  self.viewChange = function(total) {
+  self.viewChange = function(name) {
     self.showChange = true;
-    self.calculateChange(total);
+    self.calculateChange(name);
   }
 
-  self.calculateChange = function(total) {
-    self.change = self.cashAmount - total;
+  self.calculateChange = function(name) {
+    var index = self.indexOfCustomer(name);
+    self.customers[index].change = self.customers[index].cashAmount - (self.customers[index].total + self.customers[index].tax);
+    self.customers[index].change = Math.round(self.customers[index].change * 100)/100
   }
 
   self.applyDiscount = function() {
@@ -83,7 +87,7 @@ cafeTill.controller('cafeTillController',[function(){
   }
 
   self.indexOfCustomer = function(name) {
-    for(i = 0; i <= self.customers.length; i++){
+    for(i = 0; i < self.customers.length; i++){
       if(self.customers[i].name == name){
         return i;
       };
@@ -92,7 +96,7 @@ cafeTill.controller('cafeTillController',[function(){
 
   self.removeFromOrderedItems = function(item, price) {
     self.total -= price;
-    index = self.indexOfHash(item);
+    var index = self.indexOfHash(item);
     self.orderedItems.splice(index,1);
   }
 

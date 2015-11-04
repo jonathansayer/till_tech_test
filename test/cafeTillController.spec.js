@@ -101,7 +101,9 @@ describe('cafeTillController', function() {
                                       total:7.5,
                                       tax:0.648,
                                       showPayment:false,
-                                      discount:0}]);
+                                      discount:0,
+                                      cashAmount:0,
+                                      change:0}]);
     })
   });
 
@@ -140,14 +142,24 @@ describe('cafeTillController', function() {
     })
 
     it('should show change when payment is taken', function() {
-      ctrl.viewChange();
+      ctrl.customers =[{name:'Jonathan',
+                        total: 9.99,
+                        cashAmount:10.00,
+                        tax:0.86,
+                        showPayment: false}]
+      ctrl.viewChange('Jonathan');
       expect(ctrl.showChange).toEqual(true);
     })
 
     it('should be able to calcuate the correct change', function() {
-      ctrl.cashAmount = 10.00;
-      ctrl.calculateChange(8.50);
-      expect(ctrl.change).toEqual(1.50);
+      ctrl.customers =[{name:'Jonathan',
+                        showPayment: false,
+                        cashAmount:10.00,
+                        total:8,
+                        tax:0.69,
+                        change:0}]
+      ctrl.calculateChange('Jonathan');
+      expect(ctrl.customers[0].change).toEqual(1.31);
     })
   })
 

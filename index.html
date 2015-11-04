@@ -49,11 +49,11 @@
           </div>
           <button class="{{customer.name}}PaymentBtn" ng-click="ctrl.pay(customer.name)">Take Payment</button>
           <div ng-show="customer.showPayment" class="{{customer.name}}Payment">
-            <input type="number" step="0.01" class="{{customer.name}}CashAmount" ng-model="ctrl.cashAmount">Cash Amount</input>
+            <input type="number" step="0.01" class="{{customer.name}}CashAmount" ng-model="customer.cashAmount">Cash Amount</input>
           </br>
-            <button class="change" ng-click="ctrl.viewChange(customer.total + customer.tax)">Calculate Change</button>
+            <button class="change" ng-click="ctrl.viewChange(customer.name)">Calculate Change</button>
             <div ng-show="ctrl.showChange">
-            Change: {{ctrl.change | currency :"&pound;"}}
+            Change: {{customer.change | currency :"&pound;"}}
             </div>
           </div>
         </br>
