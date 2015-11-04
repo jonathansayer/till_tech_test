@@ -8,8 +8,6 @@ cafeTill.controller('cafeTillController',[function(){
   self.menu = info[0].prices[0]
   self.orderedItems = [];
   self.tax = 0;
-  self.showPayment=false;
-  self.showChange=false;
 
 
   self.addToOrderedItems = function(item, price){
@@ -52,8 +50,9 @@ cafeTill.controller('cafeTillController',[function(){
                           total:self.total,
                           tax:self.tax,
                           showPayment: false,
+                          showChange: false,
                           discount:self.discount,
-                          cashAmount:0,
+                          cashAmount:'',
                           change:0});
     self.orderedItems = [];
     self.total = 0;
@@ -66,7 +65,8 @@ cafeTill.controller('cafeTillController',[function(){
   };
 
   self.viewChange = function(name) {
-    self.showChange = true;
+    var index = self.indexOfCustomer(name);
+    self.customers[index].showChange = ! self.customers[index].showChange;
     self.calculateChange(name);
   }
 

@@ -122,10 +122,10 @@ describe('Cafe Till', function() {
 
     it('should be told how much money the customer has given', function() {
       jonPaymentBtn.click();
-      jonCashAmount.sendKeys("10.00")
-      change = element(by.className('change'));
-      change.click();
-      payment = element(by.className('JonathanPayment'));
+      jonCashAmount.sendKeys("10.00");
+      payment = element(by.className('JonathanChange'));
+      jonChangeBtn = element(by.className('JonathanChangeBtn'));
+      jonChangeBtn.click();
       expect(payment.getText()).toContain("Change: £1.85")
     });
 
@@ -143,6 +143,21 @@ describe('Cafe Till', function() {
       jonPaymentBtn.click();
       expect(jonCashAmount.isDisplayed()).toEqual(false);
     });
+
+    it('should not shwo the change of another customers when calulating anothers', function() {
+      nameInput.sendKeys('Melissa');
+      cappucino.click();
+      saveCustomerBtn.click();
+      jonPaymentBtn.click();
+      melPaymentBtn = element(by.className('MelissaPaymentBtn'));
+      melPaymentBtn.click();
+      jonCashAmount.sendKeys('10');
+      jonChangeBtn = element(by.className('JonathanChangeBtn'));
+      jonChangeBtn.click();
+      melChange = element(by.className('MelissaChange'));
+      expect(melChange.getText()).toNotContain('Change: £0.00');
+
+    })
 
   });
 

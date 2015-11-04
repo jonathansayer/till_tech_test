@@ -101,8 +101,9 @@ describe('cafeTillController', function() {
                                       total:7.5,
                                       tax:0.648,
                                       showPayment:false,
+                                      showChange:false,
                                       discount:0,
-                                      cashAmount:0,
+                                      cashAmount:'',
                                       change:0}]);
     })
   });
@@ -126,10 +127,6 @@ describe('cafeTillController', function() {
 
   describe('taking payment', function() {
 
-    it('should be initiated with a payment of false', function() {
-      expect(ctrl.showPayment).toEqual(false);
-    });
-
     it('should change payment status to true when pay function is called', function() {
       ctrl.customers = [{name:'Jonathan',
                         showPayment: false}]
@@ -137,18 +134,15 @@ describe('cafeTillController', function() {
       expect(ctrl.customers[0].showPayment).toEqual(true);
     })
 
-    it('should not show change before taking a payment', function() {
-      expect(ctrl.showChange).toEqual(false);
-    })
-
     it('should show change when payment is taken', function() {
       ctrl.customers =[{name:'Jonathan',
                         total: 9.99,
                         cashAmount:10.00,
                         tax:0.86,
-                        showPayment: false}]
+                        showPayment: false,
+                        showChange: false}]
       ctrl.viewChange('Jonathan');
-      expect(ctrl.showChange).toEqual(true);
+      expect(ctrl.customers[0].showChange).toEqual(true);
     })
 
     it('should be able to calcuate the correct change', function() {

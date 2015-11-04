@@ -51,8 +51,8 @@
           <div ng-show="customer.showPayment" class="{{customer.name}}Payment">
             <input type="number" step="0.01" class="{{customer.name}}CashAmount" ng-model="customer.cashAmount">Cash Amount</input>
           </br>
-            <button class="change" ng-click="ctrl.viewChange(customer.name)">Calculate Change</button>
-            <div ng-show="ctrl.showChange">
+            <button class="{{customer.name}}ChangeBtn" ng-click="ctrl.viewChange(customer.name)">Calculate Change</button>
+            <div class="{{customer.name}}Change" ng-show="customer.showChange">
             Change: {{customer.change | currency :"&pound;"}}
             </div>
           </div>
