@@ -159,16 +159,13 @@ describe('cafeTillController', function() {
 
   describe('discounts', function() {
 
-    it('should apply a 5% discount on order over £50', function() {
-      ctrl.total = 46.35;
-      ctrl.addToOrderedItems('Tea',3.65);
-      expect(ctrl.discount).toEqual(2.5);
-    });
-
     it('should not apply a discount on an order under £50', function() {
-      ctrl.total = 46.34;
+      ctrl.newCustomer = 'Jonathan';
+      ctrl.addToOrderedItems('Affogato', 14.8);
+      ctrl.addToOrderedItems('Affogato', 14.8);
+      ctrl.addToOrderedItems('Affogato', 14.8);
       ctrl.addToOrderedItems('Tea',3.65);
-      expect(ctrl.total).toEqual(49.99);
+      expect(ctrl.total).toEqual(48.05);
     });
 
     it('should store the discount value', function() {
