@@ -16,9 +16,11 @@
     <input class="nameInput" ng-model = "ctrl.newCustomerName" type=text>Name of Customer</input>
     <button class="newCustomer" ng-click="ctrl.addToCustomers()" >Save Customer</button>
       </br>
-    <button ng-repeat="(key,price) in ctrl.menu" ng-click="ctrl.addToOrderedItems(key,price)" >
-      {{key}}
-    </button>
+      <div class="menuBtns">
+        <button ng-repeat="(key,price) in ctrl.menu" class="{{$index}}Btn" ng-click="ctrl.addToOrderedItems(key,price)" >
+          {{key}}
+        </button>
+      </div>
     <div class="total">
       {{ctrl.newCustomerName}} </br>
       {{ctrl.total |currency : "&pound;"}}
