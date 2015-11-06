@@ -6,7 +6,26 @@ body{
   margin-left: 40%;
 }
 
-button{
-  width:20%;
-  margin-left: 37.5%;
+
+.menuBtns{
+  width:50%;
+  margin-left: 23%;
+}
+
+.menuBtn{
+  width:33%;
+}
+
+.total{
+  margin-left:46%;
+}
+
+.order{
+  margin-left:40%;
+}
+
+.orderedItem button{
+  margin-left:35%;
+  margin-right:60%;
+  margin-top:-10%;
 }

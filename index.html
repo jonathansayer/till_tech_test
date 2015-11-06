@@ -16,17 +16,18 @@
     <input class="nameInput" ng-model = "ctrl.newCustomerName" type=text>Name of Customer</input>
     <button class="newCustomer" ng-click="ctrl.addToCustomers()" >Save Customer</button>
   </br></br>
-      <div class="menuBtns" ng-repeat="(key,price) in ctrl.menu" class="{{$index}}Btn" >
-        <button ng-click="ctrl.addToOrderedItems(key,price)" >
+      <div class="menuBtns" >
+        <button ng-repeat="(key,price) in ctrl.menu" ng-click="ctrl.addToOrderedItems(key,price)" class="menuBtn" >
           {{key}}
         </button>
       </div>
+    </br>
     <div class="total">
       {{ctrl.newCustomerName}} </br>
       {{ctrl.total |currency : "&pound;"}}
     </div>
     <div class="order">
-      <div ng-repeat="order in ctrl.orderedItems">
+      <div ng-repeat="order in ctrl.orderedItems" class="orderedItem">
         {{order.quantity}}X {{order.item}} {{order.itemTotal |currency : "&pound;"}}
         <button class='{{order.item}}Remove' ng-click="ctrl.removeFromOrderedItems(order.item, order.itemTotal)"> &#x2717 </button>
       </div>
