@@ -5,7 +5,7 @@ describe('Cafe Till', function() {
     nameInput = element(by.className('nameInput'));
     total = element(by.binding('ctrl.total'));
     saveCustomerBtn = element(by.buttonText('Save Customer'))
-    receipt = element(by.className('receipt'));
+    receipt = element(by.className('receiptContainer'));
     order = element(by.className('order'));
     cappucino = element(by.buttonText('Cappucino'));
     tea = element(by.buttonText('Tea'));
