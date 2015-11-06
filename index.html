@@ -15,9 +15,9 @@
   <body ng-controller = "cafeTillController as ctrl">
     <input class="nameInput" ng-model = "ctrl.newCustomerName" type=text>Name of Customer</input>
     <button class="newCustomer" ng-click="ctrl.addToCustomers()" >Save Customer</button>
-      </br>
-      <div class="menuBtns">
-        <button ng-repeat="(key,price) in ctrl.menu" class="{{$index}}Btn" ng-click="ctrl.addToOrderedItems(key,price)" >
+  </br></br>
+      <div class="menuBtns" ng-repeat="(key,price) in ctrl.menu" class="{{$index}}Btn" >
+        <button ng-click="ctrl.addToOrderedItems(key,price)" >
           {{key}}
         </button>
       </div>
