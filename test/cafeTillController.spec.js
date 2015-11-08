@@ -100,6 +100,7 @@ describe('cafeTillController', function() {
                                             itemTotal:3.85}],
                                       total:7.5,
                                       tax:0.648,
+                                      toPay: 8.148,
                                       showPayment:false,
                                       showChange:false,
                                       discount:0,
@@ -151,6 +152,7 @@ describe('cafeTillController', function() {
                         cashAmount:10.00,
                         total:8,
                         tax:0.69,
+                        toPay:8.69,
                         change:0}]
       ctrl.calculateChange('Jonathan');
       expect(ctrl.customers[0].change).toEqual(1.31);

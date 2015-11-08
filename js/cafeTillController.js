@@ -45,10 +45,12 @@ cafeTill.controller('cafeTillController',[function(){
   self.addToCustomers = function() {
     self.applyDiscount();
     var tax = self.total * 0.0864;
+    var toPay = self.total + tax;
     self.customers.push({name:self.newCustomerName,
                           order:self.orderedItems,
                           total:self.total,
                           tax:tax,
+                          toPay: toPay,
                           showPayment: false,
                           showChange: false,
                           discount: discount,
@@ -72,7 +74,7 @@ cafeTill.controller('cafeTillController',[function(){
 
   self.calculateChange = function(name) {
     var index = self.indexOfCustomer(name);
-    self.customers[index].change = self.customers[index].cashAmount - (self.customers[index].total + self.customers[index].tax);
+    self.customers[index].change = self.customers[index].cashAmount - (self.customers[index].toPay);
     self.customers[index].change = Math.round(self.customers[index].change * 100)/100
   }
 

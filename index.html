@@ -55,7 +55,7 @@
                   Total: {{customer.total |currency : "&pound;"}} </br>
                    - {{customer.discount |currency : "&pound;"}} </br>
                   Tax: +{{customer.tax |currency : "&pound;"}} </br>
-                  To Pay:{{customer.total + info.tax |currency : "&pound;"}}
+                  To Pay:{{customer.toPay |currency : "&pound;"}}
               </div>
               <button class="{{customer.name}}PaymentBtn" ng-click="ctrl.pay(customer.name)">Take Payment</button>
               <div ng-show="customer.showPayment" class="{{customer.name}}Payment">
